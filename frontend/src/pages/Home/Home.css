@@ -49,6 +49,72 @@
   position: relative;
 }
 
-.bg-circularLight:hover {
-  transform: rotateX(0deg) rotateY(0deg) scale(1.05);
+.landing-img{
+  position: absolute;
+  width: 98.5%;
+  margin: auto;
+  background-color: #EBEBEB;
+  background-color: #fff;
+  border: 2px solid rgba(192, 192, 192, 0.5);
+  background: #12c2e9;
+  background: -webkit-linear-gradient(to right, #f64f59, #c471ed, #12c2e9); 
+  background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
+  border-radius: 20px;
+  height: 650px;
+  overflow: hidden !important;
+}
+
+.inner-wrapper {
+  border-radius: 70%;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.6) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.radial-pin {
+  opacity: 0.7;
+  text-align: center;
+  z-index: 1000;
+  background: #ffffff69;
+  border-radius: 30px;
+  border: 1px solid lightgray;
+  padding: 0.1rem 0.3rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.radial-pin svg{
+  color: #C064C0;
+  opacity: 0.7;
+}
+
+.radial-img {
+  height: 20px;
+  width: 20px;
+}
+
+/* === Animation === */
+.rotating {
+  animation: spin 350s linear infinite;
+}
+.reverse-rotating {
+  animation: spin-reverse 350s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-reverse {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
 }
