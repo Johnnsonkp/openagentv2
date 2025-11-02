@@ -13,7 +13,7 @@
 ## Task Sequence
 
 ### 1. Project Setup & Scaffolding
-- [x] Scaffold React.js frontend (Create React App, Vite, etc.)
+- [x] Scaffold React.js frontend (Vite-react w/ Typescript.)
 - [x] Scaffold Node.js backend (Express)
 - [x] Install/configure Tailwind CSS & DaisyUI in React.js
 - [ ] Install Zustand
@@ -31,6 +31,10 @@
 - [ ] Connect APIs to database schema/models
 
 ### 3. Frontend Core Features (with DaisyUI)
+- [ ] Build Landing page:
+    - [x] Initial landing page design
+    - [x] Searchbar input component UI
+    - [ ] Searchbar input component functionality
 - [ ] Build Contact Us page:
     - [ ] Display company details
     - [ ] Build DaisyUI form (First/Last Name, Email, Phone, Additional Info)
@@ -41,6 +45,7 @@
     - [ ] Display DaisyUI-styled list
     - [ ] DaisyUI buttons for "Mark as Verified"/"Delete" with Zustand state
     - [ ] Feedback/status indicators
+- [ ] Build Thank you page (after collecting details):
 - [ ] Add DaisyUI navbar, header, footer
 
 ### 4. Domain API Property Data Integration (Enhancement)
@@ -59,9 +64,11 @@
 - [ ] Manual user flow checks
 
 ### 7. Dockerization & Deployment
-- [ ] Final Docker setup for frontend and backend
+- [x] Final Docker setup for frontend and backend
 - [ ] Test local dev and Compose
 - [ ] Document local/deployment steps
+- [x] Deploy client to railway app
+- [x] Deploy server to railway app
 
 ### 8. Documentation & Submission
 - [ ] Update README with full tech stack and setup instructions

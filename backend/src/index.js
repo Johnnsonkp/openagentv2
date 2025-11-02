@@ -12,7 +12,6 @@ app.use('/api', apiRoutes);
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
-    console.log(`Backend server app ${app}`);
     console.log(`Backend server running on port ${PORT}`);
 });
 
