@@ -17,10 +17,23 @@ export interface ApiError {
   data?: unknown;
 }
 
-// Add your custom types here
-// Example:
-// export interface User {
-//   id: string;
-//   name: string;
-//   email: string;
-// }
+export interface Contact {
+  id: number
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
+  additionalInfo?: string
+  verified: boolean
+}
+
+export interface ContactStore {
+  contacts: Contact[]
+  loading: boolean
+  error: string | null
+
+  fetchContacts: () => Promise<void>
+  addContact: (contact: Omit<Contact, 'id' | 'verified'>) => Promise<void>
+  markVerified: (id: number) => Promise<void>
+  deleteContact: (id: number) => Promise<void>
+}
