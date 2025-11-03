@@ -16,9 +16,9 @@
 - [x] Scaffold React.js frontend (Vite-react w/ Typescript.)
 - [x] Scaffold Node.js backend (Express)
 - [x] Install/configure Tailwind CSS & DaisyUI in React.js
-- [ ] Install Zustand
+- [x] Install Zustand statemanager + setup stores
 - [x] Configure Docker (Dockerfile, Compose)
-- [x] Set up SQLite or PostgreSQL database
+- [x] Set PostgreSQL database
 
 ### 2. Backend API Development
 - [x] Initial Node.js/Express setup:

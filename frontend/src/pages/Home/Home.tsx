@@ -61,7 +61,7 @@ function Home() {
     };
 
     return (
-      <div className="min-h-screen flex flex-col items-center p-5 py-2" onLoad={() =>plotPinIconsDynamically()}>
+      <div className="min-h-screen flex flex-col items-center px-5 py-3" onLoad={() =>plotPinIconsDynamically()}>
         <img src={OverheadImage} className="page-content landing-img" alt="Overhead Map" />
         <div className='border-4 border-gray-200 h-[85vh] w-full rounded-lg radial-container'>
           <Nav />

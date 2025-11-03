@@ -1,47 +1,64 @@
+import bannerPattern from '../../assets/images/pattern-bg.png'
+import openagentLightLogo from '../../assets/images/openagent-light-logo.png'
+
 function Footer() {
   return (
-    <footer className="footer sm:footer-horizontal bg-neutral text-neutral-content grid-rows-2 p-10">
-      <nav>
-        <h6 className="footer-title">Services</h6>
-        <a className="link link-hover">Branding</a>
-        <a className="link link-hover">Design</a>
-        <a className="link link-hover">Marketing</a>
-        <a className="link link-hover">Advertisement</a>
-      </nav>
-      <nav>
-        <h6 className="footer-title">Company</h6>
-        <a className="link link-hover">About us</a>
-        <a className="link link-hover">Contact</a>
-        <a className="link link-hover">Jobs</a>
-        <a className="link link-hover">Press kit</a>
-      </nav>
-      <nav>
-        <h6 className="footer-title">Legal</h6>
-        <a className="link link-hover">Terms of use</a>
-        <a className="link link-hover">Privacy policy</a>
-        <a className="link link-hover">Cookie policy</a>
-      </nav>
-      <nav>
-        <h6 className="footer-title">Social</h6>
-        <a className="link link-hover">Twitter</a>
-        <a className="link link-hover">Instagram</a>
-        <a className="link link-hover">Facebook</a>
-        <a className="link link-hover">GitHub</a>
-      </nav>
-      <nav>
-        <h6 className="footer-title">Explore</h6>
-        <a className="link link-hover">Features</a>
-        <a className="link link-hover">Enterprise</a>
-        <a className="link link-hover">Security</a>
-        <a className="link link-hover">Pricing</a>
-      </nav>
-      <nav>
-        <h6 className="footer-title">Apps</h6>
-        <a className="link link-hover">Mac</a>
-        <a className="link link-hover">Windows</a>
-        <a className="link link-hover">iPhone</a>
-        <a className="link link-hover">Android</a>
-      </nav>
+    <footer 
+      className="flex-col align-middle justify-center footer bg-[#292928] text-neutral-content p-10"
+      style={{ backgroundImage: `url(${bannerPattern})` }}
+    >
+
+      <div className='mx-auto'>
+        <a href="https://www.openagent.com.au" 
+          rel="noopener" 
+          aria-label="OpenAgent Homepage" 
+          className="ga-event">
+            <img 
+              className="ga-event" 
+              data-category="Footer" 
+              data-eventlabel="OpenAgent Homepage" 
+              data-eventvalue="OpenAgent Homepage" 
+              src={openagentLightLogo} 
+              alt="OpenAgent Logo" width="150" 
+            />
+        </a>
+      </div>
+
+      <div className='flex w-[900px] mx-aut'>
+        <nav className='w-full text-center'>
+          <h6 className="footer-title text-[#00AB55] font-bold">Corporate</h6>
+          <div className='flex-col'>
+            <div><a className="link link-hover">Branding</a></div>
+            <div><a className="link link-hover">Design</a></div>
+            <div><a className="link link-hover">Marketing</a></div>
+            <div><a className="link link-hover">Advertisement</a></div>
+          </div>
+        </nav>
+        <nav className='w-full text-center'>
+          <h6 className="footer-title text-[#00AB55] font-bold">Resources</h6>
+          <div><a className="link link-hover">About us</a></div>
+          <div><a className="link link-hover">Contact</a></div>
+          <div><a className="link link-hover">Jobs</a></div>
+          <div><a className="link link-hover">Press kit</a></div>
+        </nav>
+        <nav className='w-full text-center'>
+          <h6 className="footer-title text-[#00AB55] font-bold">Tools</h6>
+          <div><a className="link link-hover">Terms of use</a></div>
+          <div><a className="link link-hover">Privacy policy</a></div>
+          <div><a className="link link-hover">Cookie policy</a></div>
+        </nav>
+        <nav className='w-full text-center'>
+          <h6 className="footer-title text-[#00AB55] font-bold">Market News & Trends</h6>
+          <div><a className="link link-hover">Twitter</a></div>
+          <div><a className="link link-hover">Instagram</a></div>
+          <div><a className="link link-hover">Facebook</a></div>
+          <div><a className="link link-hover">GitHub</a></div>
+        </nav>
+      </div>
+
+      <div className='w-full h-[50px] bg-[#1B1B1A] text-center border'>
+        <p className='text-center m-auto'>© 2025 Chinonso.io. All rights reserved.</p>
+      </div>
     </footer>
   )
 }

@@ -3,8 +3,9 @@ import OpenAgentLogo from "../../assets/openAgentLogo.svg"
 
 function Nav() {
   return (
-    <div className="w-full h-30 flex absolute top-2 left-0 px-8 z-5">
+    <div className="w-full h-25 flex absolute top-2 left-0 px-8 z-5">
       <nav className="navbar bg-base-100 shadow-lg max-w-[843px] my-auto mx-auto rounded-2xl flex justify-between">
+
         <Link to="/" className="btn btn-ghost border-none text-xl hover:bg-white hover:border-none hover:shadow-none">
           <img src={OpenAgentLogo} alt="OpenAgent Logo" className="h-8" />
         </Link>
