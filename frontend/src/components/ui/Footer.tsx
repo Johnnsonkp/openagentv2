@@ -92,7 +92,10 @@ function Footer() {
       </div>
 
       <div className="w-full h-[50px] bg-[#1B1B1A] text-center border-t mt-6">
-        <p className="text-center m-auto">© 2025 Chinonso.io. All rights reserved.</p>
+        <p className="text-center m-auto">© 2025
+          <a href="https://www.chinonso.io/" target="_blank" rel="noopener noreferrer" className="ml-1 underline">Chinonso.io</a>.
+            All rights reserved.
+        </p>
       </div>
     </footer>
   )
