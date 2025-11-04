@@ -1,5 +1,5 @@
 import bannerPattern from '../../assets/images/pattern-bg.png'
-import openagentLightLogo from '../../assets/images/openagent-light-logo.png'
+// import openagentLightLogo from '../../assets/images/openagent-light-logo.png'
 
 function Footer() {
   return (
@@ -14,7 +14,7 @@ function Footer() {
           aria-label="OpenAgent Homepage"
           className="ga-event"
         >
-          <img
+          {/* <img
             className="ga-event"
             data-category="Footer"
             data-eventlabel="OpenAgent Homepage"
@@ -22,7 +22,7 @@ function Footer() {
             src={openagentLightLogo}
             alt="OpenAgent Logo"
             width="150"
-          />
+          /> */}
 
         </a>
       </div>
