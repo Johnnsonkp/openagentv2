@@ -38,20 +38,10 @@
 }
 
 .bg-circularLight {
-  width: 100vw;
-  height: 100vh;
-
-  width: 120%;
-  height: 120%;
-
   padding: 100px;
   position: absolute;
-
-  width: 120vw;
-  height: 120vh;
   width: 1600px;
   height: 1600px;
-
   background:
     repeating-radial-gradient(
       circle at center,
@@ -71,6 +61,24 @@
   align-items: center;
   overflow: hidden;
   position: relative;
+}
+
+@media (max-width: 640px) {
+  .radial-container {
+    height: 100%;
+  }
+}
+
+/* Desktop */
+@media (max-width: 768px) {
+  .radial-container {
+    height: 40vh;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1024px) {
+
 }
 
 .landing-img{
