@@ -1,5 +1,3 @@
-// Validation utility functions for contact form
-
 export interface ValidationError {
   field: string;
   message: string;
@@ -10,42 +8,26 @@ export interface ValidationResult {
   errors: ValidationError[];
 }
 
-/**
- * Validate email format
- */
 export const validateEmail = (email: string): boolean => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 };
 
-/**
- * Validate phone number (accepts various formats)
- * Allows: +1234567890, (123) 456-7890, 123-456-7890, 123.456.7890, etc.
- */
 export const validatePhone = (phone: string): boolean => {
   const phoneRegex = /^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[(]?[0-9]{1,4}[)]?[-\s\.]?[0-9]{1,9}$/;
   return phoneRegex.test(phone.replace(/\s/g, ''));
 };
 
-/**
- * Validate required field (not empty)
- */
 export const validateRequired = (value: string): boolean => {
   return value.trim().length > 0;
 };
 
-/**
- * Validate name fields (min 2 characters, letters only with spaces/hyphens)
- */
 export const validateName = (name: string): boolean => {
   if (name.trim().length < 2) return false;
   const nameRegex = /^[a-zA-Z\s\-']+$/;
   return nameRegex.test(name);
 };
 
-/**
- * Comprehensive form validation
- */
 export const validateContactForm = (data: {
   firstName: string;
   lastName: string;

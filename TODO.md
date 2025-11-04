@@ -22,31 +22,31 @@
 
 ### 2. Backend API Development
 - [x] Initial Node.js/Express setup:
-- [ ] Implement REST API endpoints in Node.js/Express:
+- [x] Implement REST API endpoints in Node.js/Express:
     - POST /contacts (create)
     - GET /contacts (list)
     - PUT /contacts/:id (mark verified)
     - DELETE /contacts/:id (delete)
-- [ ] Add server-side validation
-- [ ] Connect APIs to database schema/models
+- [x] Add server-side validation
+- [x] Connect APIs to database schema/models
 
 ### 3. Frontend Core Features (with DaisyUI)
-- [ ] Build Landing page:
+- [x] Build Landing page:
     - [x] Initial landing page design
     - [x] Searchbar input component UI
     - [ ] Searchbar input component functionality
-- [ ] Build Contact Us page:
-    - [ ] Display company details
-    - [ ] Build DaisyUI form (First/Last Name, Email, Phone, Additional Info)
-    - [ ] Form validation (Zustand for state)
-    - [ ] Submit to API, show DaisyUI Thank You message
-- [ ] Build Contacts List page:
-    - [ ] Fetch contacts from backend API
-    - [ ] Display DaisyUI-styled list
-    - [ ] DaisyUI buttons for "Mark as Verified"/"Delete" with Zustand state
-    - [ ] Feedback/status indicators
-- [ ] Build Thank you page (after collecting details):
-- [ ] Add DaisyUI navbar, header, footer
+- [x] Build Contact Us page:
+    - [x] Display company details
+    - [x] Build DaisyUI form (First/Last Name, Email, Phone, Additional Info)
+    - [x] Form validation (Zustand for state)
+    - [x] Submit to API, show DaisyUI Thank You message
+- [x] Build Contacts List page:
+    - [x] Fetch contacts from backend API
+    - [x] Display DaisyUI-styled list
+    - [x] DaisyUI buttons for "Mark as Verified"/"Delete" with Zustand state
+    - [x] Feedback/status indicators
+- [x] Build Thank you page (after collecting details):
+- [x] Add DaisyUI navbar, header, footer
 
 ### 4. Domain API Property Data Integration (Enhancement)
 - [ ] Integrate Domain API in React.js frontend
@@ -54,9 +54,9 @@
 - [ ] Secure API keys in env variables
 
 ### 5. Responsive Design & Theming
-- [ ] Ensure responsiveness with DaisyUI utility classes
-- [ ] Test across mobile, tablet, desktop
-- [ ] Theme switching & mobile polish
+- [x] Ensure responsiveness with DaisyUI utility classes
+- [x] Test across mobile, tablet, desktop
+- [x] Theme switching & mobile polish
 
 ### 6. Testing & Quality Assurance
 - [ ] Unit tests for core components

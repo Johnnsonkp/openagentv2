@@ -11,7 +11,8 @@ export const useContactStore = create<ContactStore>((set, get) => ({
     try {
       set({ loading: true })
       const { data } = await axios.get('/api/contacts')
-      set({ contacts: data, loading: false })
+      console.log('Fetched contacts:', data.data )
+      set({ contacts: data.data, loading: false })
     } catch (err: any) {
       set({ error: err.message, loading: false })
     }

@@ -2,11 +2,11 @@ import axios from 'axios';
 
 // Create axios instance with base configuration
 export const apiClient = axios.create({
-  baseURL: '/api', // Vite proxy will forward to backend
+  baseURL: '/api', 
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 10000, // 10 second timeout
+  timeout: 10000, 
 });
 
 // Add response interceptor for error handling
