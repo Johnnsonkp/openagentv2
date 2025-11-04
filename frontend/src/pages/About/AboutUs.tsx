@@ -7,7 +7,7 @@ function AboutUs() {
     <div className="h-full">
       <BannerSection title={'Find an agent you trust, get the support you need'}/>
 
-      <main className="h-full min-h-[40vh] w-full py-5 px-4 sm:px-8 md:px-12 lg:px-20 pb-30">
+      <main className="h-full min-h-[40vh] max-w-[1350px] mx-auto w-full py-5 px-4 sm:px-8 md:px-12 lg:px-20 pb-30">
         <section className="flex flex-col md:flex-row justify-between items-start gap-6 md:gap-8 my-6 sm:my-8 md:my-10">
           <div className="left w-full md:flex-[0.48]">
             <p className="text-sm sm:text-base">Welcome to OpenAgent. We've been around since 2013 and our vision is to make it easy for people to buy, sell and own property.</p>

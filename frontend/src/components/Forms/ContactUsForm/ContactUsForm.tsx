@@ -27,7 +27,6 @@ export default function ContactUsForm() {
           <form onSubmit={handleSubmit}>
             <input type="checkbox" name="botcheck" hidden />
 
-            {/* First Name */}
             <div className="mb-5">
               <input
                 type="text"
@@ -47,7 +46,6 @@ export default function ContactUsForm() {
               )}
             </div>
 
-            {/* Last Name */}
             <div className="mb-5">
               <input
                 type="text"
@@ -67,7 +65,6 @@ export default function ContactUsForm() {
               )}
             </div>
 
-            {/* Email */}
             <div className="mb-5">
               <label htmlFor="email_address" className="sr-only">
                 Email Address
@@ -111,7 +108,6 @@ export default function ContactUsForm() {
               )}
             </div>
 
-            {/* Additional Info */}
             <div className="mb-3">
               <textarea
                 name="message"
@@ -121,15 +117,12 @@ export default function ContactUsForm() {
                 className="bg-white w-full px-4 py-3 border placeholder:text-gray-400 rounded-md outline-none h-36 focus:ring-4 border-gray-500 focus:border-gray-600 ring-gray-100"
               />
             </div>
-
-            {/* Submit Error */}
             {submitError && (
               <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
                 {submitError}
               </div>
             )}
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={isSubmitting}
