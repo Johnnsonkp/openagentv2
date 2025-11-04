@@ -23,6 +23,7 @@ function Footer() {
             alt="OpenAgent Logo"
             width="150"
           />
+
         </a>
       </div>
 
