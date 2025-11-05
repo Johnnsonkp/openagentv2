@@ -23,7 +23,6 @@ export default function ContactUsForm() {
 
         <div className="bg-[#F7F7F8] p-10">
           <h4 className="mb-5">Fill in your details and we'll be in touch right away. Or if you prefer, call us on 13 24 34</h4>
-          
           <form onSubmit={handleSubmit}>
             <input type="checkbox" name="botcheck" hidden />
 
@@ -41,9 +40,7 @@ export default function ContactUsForm() {
                     : 'border-gray-500 focus:border-gray-600 ring-gray-100'
                 }`}
               />
-              {errors.firstName && (
-                <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
-              )}
+              {errors.firstName && (<p className="text-red-500 text-sm mt-1">{errors.firstName}</p>)}
             </div>
 
             <div className="mb-5">
@@ -60,9 +57,7 @@ export default function ContactUsForm() {
                     : 'border-gray-500 focus:border-gray-600 ring-gray-100'
                 }`}
               />
-              {errors.lastName && (
-                <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>
-              )}
+              {errors.lastName && (<p className="text-red-500 text-sm mt-1">{errors.lastName}</p>)}
             </div>
 
             <div className="mb-5">
@@ -83,12 +78,9 @@ export default function ContactUsForm() {
                     : 'border-gray-500 focus:border-gray-600 ring-gray-100'
                 }`}
               />
-              {errors.email && (
-                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-              )}
+              {errors.email && (<p className="text-red-500 text-sm mt-1">{errors.email}</p>)}
             </div>
 
-            {/* Phone */}
             <div className="mb-5">
               <input
                 type="tel"
@@ -103,9 +95,7 @@ export default function ContactUsForm() {
                     : 'border-gray-500 focus:border-gray-600 ring-gray-100'
                 }`}
               />
-              {errors.phone && (
-                <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
-              )}
+              {errors.phone && (<p className="text-red-500 text-sm mt-1">{errors.phone}</p>)}
             </div>
 
             <div className="mb-3">

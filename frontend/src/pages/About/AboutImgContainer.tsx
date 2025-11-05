@@ -18,7 +18,7 @@ function AboutImgContainer({src, alt}: {src: string, alt: string}) {
     
   return (
     <>
-    {!loadingDelay && src? 
+    {loadingDelay == false && src? 
       <img 
         src={src} 
         alt={alt} 

@@ -20,8 +20,9 @@ function TableList() {
   });
 
   useEffect(() => {
-    fetchContacts();
-    console.log("reredering table list")
+    if(contacts?.length === 0){
+      fetchContacts();
+    }
   }, [fetchContacts]);
 
   const formatDate = (isoString: string) => {
