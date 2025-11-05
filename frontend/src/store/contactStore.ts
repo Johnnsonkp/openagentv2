@@ -1,5 +1,5 @@
 import { ContactStore } from '@/types'
-import axios from 'axios'
+import { apiClient } from '../lib/api'
 import { create } from 'zustand'
 
 export const useContactStore = create<ContactStore>((set, get) => ({
@@ -10,7 +10,7 @@ export const useContactStore = create<ContactStore>((set, get) => ({
   fetchContacts: async () => {
     try {
       set({ loading: true })
-      const { data } = await axios.get(`/api/contacts`)
+      const { data } = await apiClient.get(`/contacts`)
       console.log('Fetched contacts:', data.data )
       set({ contacts: data.data, loading: false })
     } catch (err: any) {
@@ -21,7 +21,7 @@ export const useContactStore = create<ContactStore>((set, get) => ({
   addContact: async (contact) => {
     try {
       set({ loading: true })
-      const { data } = await axios.post('/api/contacts', contact)
+      const { data } = await apiClient.post('/contacts', contact)
       set({ contacts: [...get().contacts, data], loading: false })
     } catch (err: any) {
       set({ error: err.message, loading: false })
@@ -30,7 +30,7 @@ export const useContactStore = create<ContactStore>((set, get) => ({
 
   markVerified: async (id) => {
     try {
-      await axios.put(`/api/contacts/${id}`, { verified: true })
+      await apiClient.put(`/contacts/${id}`, { verified: true })
       set({
         contacts: get().contacts.map(c =>
           c.id === id ? { ...c, verified: true } : c
@@ -43,7 +43,7 @@ export const useContactStore = create<ContactStore>((set, get) => ({
 
   deleteContact: async (id) => {
     try {
-      await axios.delete(`/api/contacts/${id}`)
+      await apiClient.delete(`/contacts/${id}`)
       set({
         contacts: get().contacts.filter(c => c.id !== id),
       })
