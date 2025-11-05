@@ -12,6 +12,8 @@ export const useContactStore = create<ContactStore>((set, get) => ({
       set({ loading: true })
       const { data } = await apiClient.get(`/contacts`)
       console.log('Fetched contacts:', data.data )
+      // console.log('apiClient:', apiClient )
+      console.log('VITE_API_BASE:', `${import.meta.env.VITE_API_BASE}` )
       set({ contacts: data.data, loading: false })
     } catch (err: any) {
       set({ error: err.message, loading: false })
@@ -22,6 +24,9 @@ export const useContactStore = create<ContactStore>((set, get) => ({
     try {
       set({ loading: true })
       const { data } = await apiClient.post('/contacts', contact)
+      // console.log('apiClient:', apiClient )
+      console.log('post route:', "/contacts" )
+      console.log('VITE_API_BASE:', `${import.meta.env.VITE_API_BASE}` )
       set({ contacts: [...get().contacts, data], loading: false })
     } catch (err: any) {
       set({ error: err.message, loading: false })
