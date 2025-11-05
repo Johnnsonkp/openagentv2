@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 
 import {Contact} from "../../types/contactTypes"
+import DefaultTable from "./defaultTable";
 import { useContactStore } from "../../store/contactStore"
 
 function TableList() {
@@ -59,6 +60,8 @@ function TableList() {
       </dialog>
   )
 
+  {loading && contacts.length === 0 && <DefaultTable />}
+
   return (
     <>
     <h2>Contacts ({contacts && contacts.length})</h2>
@@ -80,7 +83,7 @@ function TableList() {
           </tr>
         </thead>
         <tbody>
-          {!loading && contacts.map((contact: Contact, index: number) => (
+          {!loading && contacts.length > 0 && contacts.map((contact: Contact, index: number) => (
             <>
             <tr key={index}>
               <th>

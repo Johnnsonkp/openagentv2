@@ -10,7 +10,7 @@ export const useContactStore = create<ContactStore>((set, get) => ({
   fetchContacts: async () => {
     try {
       set({ loading: true })
-      const { data } = await axios.get('/api/contacts')
+      const { data } = await axios.get(`/api/contacts`)
       console.log('Fetched contacts:', data.data )
       set({ contacts: data.data, loading: false })
     } catch (err: any) {

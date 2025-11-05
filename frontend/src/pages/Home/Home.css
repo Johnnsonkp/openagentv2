@@ -61,6 +61,7 @@
   align-items: center;
   overflow: hidden;
   position: relative;
+  max-width: 1500px;
 }
 
 @media (max-width: 640px) {
@@ -84,6 +85,7 @@
 .landing-img{
   position: absolute;
   width: 95%;
+  max-width: 1500px;
   margin: auto;
   background-color: #EBEBEB;
   background-color: #fff;
