@@ -8,6 +8,7 @@ let hasLoaded = false;
 
 function LandingPageImage() {
   const [loadingDelay, setLoadingDelay] = useState(!hasLoaded);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     if (!hasLoaded) {
@@ -21,7 +22,12 @@ function LandingPageImage() {
   return (
     <>
       {!loadingDelay &&OverheadImage ? (
-        <img src={OverheadImage} className="page-content landing-img" alt="Overhead Map" />
+        <img 
+          src={OverheadImage} 
+          onLoad={() => setLoaded(true)}
+          className={`page-content landing-img w-full h-auto rounded-lg transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+          alt="Overhead Map" 
+        />
       ) : (
         <div className={`page-content skeleton-pulse`} />
       )}
