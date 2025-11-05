@@ -75,6 +75,5 @@
 ### 8. Documentation & Submission
 - [ ] Update README with full tech stack and setup instructions
 - [ ] Document DaisyUI/Zustand/Domain API usage
-- [ ] Host on GitHub for submission
 
 ---

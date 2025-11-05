@@ -56,4 +56,20 @@ export const useContactStore = create<ContactStore>((set, get) => ({
       set({ error: err.message })
     }
   },
+
+  updateContact: async (id, updatedData) => {
+    try {
+      console.log("Editing contact ID:", id, "with data:", updatedData)
+      set({ loading: true })
+      const { data } = await apiClient.put(`/contacts/update/${id}`, updatedData)
+      set({
+        contacts: get().contacts.map(c =>
+          c.id === id ? { ...c, ...data.data } : c
+        ),
+        loading: false
+      })
+    } catch (err: any) {
+      set({ error: err.message, loading: false })
+    }
+  },
 }))

@@ -128,6 +128,58 @@ router.put('/contacts/:id', async (req, res) => {
   }
 });
 
+
+
+router.put('/contacts/update/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { firstName, lastName, email, phone, additionalInfo, verified } = req.body;
+
+    const fName = firstName == null ? null : firstName.trim();
+    const lName = lastName == null ? null : lastName.trim();
+    const em = email == null ? null : email.trim();
+    const ph = phone == null ? null : phone.trim();
+    const addInfo = additionalInfo == null ? null : additionalInfo.trim();
+    const ver = typeof verified === 'boolean' ? verified : (verified == null ? null : !!verified);
+
+    const result = await pool.query(
+      `UPDATE contacts
+         SET first_name     = COALESCE($1, first_name),
+             last_name      = COALESCE($2, last_name),
+             email          = COALESCE($3, email),
+             phone          = COALESCE($4, phone),
+             additional_info= COALESCE($5, additional_info),
+             verified       = COALESCE($6, verified)
+       WHERE id = $7
+       RETURNING id, first_name as "firstName", last_name as "lastName", email, phone,
+                 additional_info as "additionalInfo", verified, created_at as "createdAt"`,
+      [fName, lName, em, ph, addInfo, ver, id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'Contact not found'
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'Contact updated successfully',
+      data: result.rows[0]
+    });
+  } catch (error) {
+    console.error('Error updating contact:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to update contact'
+    });
+  }
+});
+
+
+
+
 router.delete('/contacts/:id', async (req, res) => {
   try {
     const { id } = req.params;

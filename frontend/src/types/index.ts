@@ -36,4 +36,5 @@ export interface ContactStore {
   addContact: (contact: Omit<Contact, 'id' | 'verified'>) => Promise<void>
   markVerified: (id: number) => Promise<void>
   deleteContact: (id: number) => Promise<void>
+  updateContact: (id: number, updatedData: Partial<Omit<Contact, 'id' | 'verified'>>) => Promise<void>
 }

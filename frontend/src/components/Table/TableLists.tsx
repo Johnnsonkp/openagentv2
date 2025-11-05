@@ -5,13 +5,23 @@ import DefaultTable from "./defaultTable";
 import { useContactStore } from "../../store/contactStore"
 
 function TableList() {
-  const { contacts, loading, fetchContacts, markVerified, deleteContact } = useContactStore();
+  const { contacts, loading, fetchContacts, markVerified, deleteContact, updateContact } = useContactStore();
   const [toggleModal, setToggleModal] = useState(false);
+  const [toggleEditModal, setToggleEditModal] = useState(false);
   const [selectedContact, setSelectedContact] = useState({} as { firstName: string; lastName: string; id: number });
+  const [editingContact, setEditingContact] = useState<Contact | null>(null);
+  const [editForm, setEditForm] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    additionalInfo: '', 
+    verified: false,
+  });
 
   useEffect(() => {
     fetchContacts();
-
+    console.log("reredering table list")
   }, [fetchContacts]);
 
   const formatDate = (isoString: string) => {
@@ -22,21 +32,57 @@ function TableList() {
     return `${day}/${month}/${year}`;
   };
 
-  // const EditIcon: React.FC = () => (
-  //   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-  //     <path d="M19 13.66V19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.34" />
-  //     <path d="m17 1 4 4-10 10H7v-4z" />
-  //   </svg>
-  // );
+  const EditIcon: React.FC = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M19 13.66V19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.34" />
+      <path d="m17 1 4 4-10 10H7v-4z" />
+    </svg>
+  );
 
-  const DeleteConfirmationModal = () => (
-      <dialog id="my_modal_1" className="modal" open={toggleModal}>
-        <div className="modal-box">
+  const handleEditClick = (contact: Contact) => {
+    setEditingContact(contact);
+    setEditForm({
+      firstName: contact.firstName,
+      lastName: contact.lastName,
+      email: contact.email,
+      phone: contact.phone,
+      additionalInfo: contact.additionalInfo || '',
+      verified: contact.verified || false,
+    });
+    setToggleEditModal(true);
+  };
+
+  const handleEditSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingContact) return;
+
+    try {
+      await updateContact(editingContact.id, editForm);
+      
+      setToggleEditModal(false);
+      setEditingContact(null);
+    } catch (error) {
+      console.error('Failed to update contact:', error);
+    }
+  };
+
+  {loading && contacts?.length === 0 && <DefaultTable />}
+
+  return (
+    <div>
+    <h2>Contacts ({contacts && contacts?.length})</h2>
+
+    {/* Delete Confirmation Modal */}
+    {toggleModal && (
+      <div
+        id="deleteConfirmationModal"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+      >
+        <div className="w-full max-w-2xl mx-4 bg-white rounded-lg p-8 relative border-2">
           <p className="py-4 text-xl">
             Are you sure you want to delete this contact? This action cannot be undone.
           </p>
           <div className="modal-action flex-col">
-
             <div className="border rounded-full w-fit px-3 py-1 flex items-center gap-3 mb-4">
               <div className="avatar">
                 <div className="flex items-center justify-center bg-neutral text-neutral-content h-10 w-10 rounded-full">
@@ -46,27 +92,132 @@ function TableList() {
               {selectedContact?.firstName} {selectedContact?.lastName}
             </div>
 
-            <form method="dialog" className="flex justify-end">
-              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+            <div className="flex justify-end">
+              <button 
+                onClick={() => setToggleModal(false)} 
+                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+              >
               ✕
               </button>
-              <button className="btn mx-1">Cancel</button>
+              <button onClick={() => setToggleModal(false)} className="btn mx-1">Cancel</button>
               <button 
                 onClick={() => deleteContact(selectedContact?.id).then(() => setToggleModal(false))}
                 className="btn mx-1 text-red-600 hover:text-white hover:bg-red-500">Delete</button>
-            </form>
+            </div>
           </div>
         </div>
-      </dialog>
-  )
+      </div>
+    )}
 
-  {loading && contacts?.length === 0 && <DefaultTable />}
+    {/* Edit Contact Modal */}
+    {toggleEditModal && (
+      <div
+        id="editContactModal"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+      >
+        <div className="w-full max-w-2xl mx-4 bg-white rounded-lg p-8 relative border-2">
+          <h3 className="font-bold text-2xl mb-4">Edit Contact</h3>
 
-  return (
-    <>
-    <h2>Contacts ({contacts && contacts?.length})</h2>
+          <form onSubmit={handleEditSubmit}>
+            <div className="grid grid-cols-2 gap-4">
+              {/* First Name */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">First Name</span>
+                </label>
+                <input
+                  type="text"
+                  value={editForm.firstName}
+                  onChange={(e) => setEditForm({ ...editForm, firstName: e.target.value })}
+                  className="input input-bordered w-full"
+                  required
+                />
+              </div>
 
-    <DeleteConfirmationModal />
+              {/* Last Name */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Last Name</span>
+                </label>
+                <input
+                  type="text"
+                  value={editForm.lastName}
+                  onChange={(e) => setEditForm({ ...editForm, lastName: e.target.value })}
+                  className="input input-bordered w-full"
+                  required
+                />
+              </div>
+
+              {/* Email */}
+              <div className="form-control col-span-2">
+                <label className="label">
+                  <span className="label-text">Email</span>
+                </label>
+                <input
+                  type="email"
+                  value={editForm.email}
+                  onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
+                  className="input input-bordered w-full"
+                  required
+                />
+              </div>
+
+              {/* Phone */}
+              <div className="form-control col-span-2">
+                <label className="label">
+                  <span className="label-text">Phone</span>
+                </label>
+                <input
+                  type="tel"
+                  value={editForm.phone}
+                  onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })}
+                  className="input input-bordered w-full"
+                  required
+                />
+              </div>
+
+              {/* Additional Info */}
+              <div className="form-control col-span-2">
+                <label className="label">
+                  <span className="label-text">Message</span>
+                </label>
+                <textarea
+                  value={editForm.additionalInfo}
+                  onChange={(e) => setEditForm({ ...editForm, additionalInfo: e.target.value })}
+                  className="textarea textarea-bordered h-24 w-full"
+                />
+              </div>
+            </div>
+
+            <div className="modal-action mt-4 flex justify-end gap-2">
+              <button
+                type="button"
+                className="btn"
+                onClick={() => {
+                  setToggleEditModal(false);
+                  setEditingContact(null);
+                }}
+              >
+                Cancel
+              </button>
+              <button type="submit" className="btn btn-primary">
+                Save Changes
+              </button>
+            </div>
+          </form>
+
+          <button
+            className="btn btn-sm btn-circle btn-ghost absolute right-3 top-3"
+            onClick={() => {
+              setToggleEditModal(false);
+              setEditingContact(null);
+            }}
+          >
+            ✕
+          </button>
+        </div>
+      </div>
+    )}
     
     <div className="overflow-x-auto border border-gray-300 rounded-md overflow-hidden">
       <table className="table mx-auto">
@@ -84,14 +235,14 @@ function TableList() {
         </thead>
         <tbody>
           {!loading && contacts?.length > 0 && contacts?.map((contact: Contact, index: number) => (
-            <>
-            <tr key={index}>
+            <tr key={contact.id}>
               <th>
                 <label>
                   <input 
                     type="checkbox" 
                     className="checkbox" 
                     checked={contact.verified}
+                    disabled={contact.verified}
                     onChange={() => markVerified(contact.id)}
                   />
                 </label>
@@ -108,7 +259,7 @@ function TableList() {
                     <div className="font-bold mb-1">{contact.firstName} {contact.lastName}</div>
                     {contact.verified?
                       <div className="badge badge-success font-bold rounded-full gap-1">
-                        <svg className="size-[1em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="currentColor" strokeLinejoin="miter" strokeLinecap="butt"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeLinecap="square" stroke-miterlimit="10" strokeWidth="2"></circle><polyline points="7 13 10 16 17 8" fill="none" stroke="currentColor" strokeLinecap="square" stroke-miterlimit="10" strokeWidth="2"></polyline></g></svg>
+                        <svg className="size-[1em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="currentColor" strokeLinejoin="miter" strokeLinecap="butt"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeLinecap="square" strokeMiterlimit="10" strokeWidth="2"></circle><polyline points="7 13 10 16 17 8" fill="none" stroke="currentColor" strokeLinecap="square" strokeMiterlimit="10" strokeWidth="2"></polyline></g></svg>
                         Verified
                       </div> : 
                       <div className="opacity-60 badge badge-outline badge-ghost rounded-full">Unverified</div>}
@@ -126,25 +277,25 @@ function TableList() {
                 >
                 </textarea>
               </th>
-              <td className="flex gap-2 items-center text-sm text-gray-500">
-                {/* <button
-                    className="flex items-center gap-1 border border-gray-300 rounded-md px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:border-blue-500 transition-colors cursor-pointer"
+              <td className="flex-col gap-2 justify-between items-center text-sm text-gray-500">
+                <button
+                    onClick={() => handleEditClick(contact)}
+                    className="flex my-1 items-center gap-1 border border-gray-300 rounded-md px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:border-blue-500 transition-colors cursor-pointer"
                   >
                     <EditIcon />
                     Edit
                   </button>
-                  <span className="text-gray-300">|</span> */}
+                  {/* <span className="text-gray-300">|</span> */}
                   <button 
                     onClick={()=> {
                       setSelectedContact({ firstName: contact?.firstName, lastName: contact?.lastName, id: contact?.id });
                       setToggleModal(true)
                     }}
-                    className="border border-gray-300 rounded-md px-2 py-1 text-sm text-red-600 hover:text-red-800 transition-colors cursor-pointer">
+                    className="my-1 border border-gray-300 rounded-md px-2 py-1 text-sm text-red-600 hover:text-red-800 transition-colors cursor-pointer">
                     Delete
                   </button>
               </td>
               </tr>
-            </>
           ))}
         </tbody>
         <tfoot className="bg-gray-300 w-full">
@@ -161,7 +312,7 @@ function TableList() {
         </tfoot>
       </table>
     </div>
-    </>
+    </div>
   )
 }
 
