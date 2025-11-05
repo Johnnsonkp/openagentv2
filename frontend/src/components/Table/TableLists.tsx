@@ -150,7 +150,7 @@ function TableList() {
         <tfoot className="bg-gray-300 w-full">
           <tr>
             <th className="">Total:</th>
-            <th>{contacts.length}</th>
+            <th>{contacts?.length || 0}</th>
             <th className="text-transparent">Favorite Color</th>
             <th className="text-transparent">Favorite Color</th>
             <th className="text-transparent">Favorite Color</th>
