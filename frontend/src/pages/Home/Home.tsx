@@ -3,7 +3,7 @@ import './Home.css';
 import AlgoIcon from '../../assets/images/algo-icon.svg';
 import CallerIcon from '../../assets/images/caller-icon.svg';
 import CustomTab from '../../components/Tab/CustomTab';
-import OverheadImage from "../../assets/images/overhead-map.jpg"
+import LandingPageImage from '../../components/ui/LandingPageImage';
 import SellerIcon from '../../assets/images/seller-icon.svg';
 import locationPin from '../../assets/location-pin.svg';
 
@@ -43,10 +43,7 @@ function Home() {
       className="min-h-screen flex flex-col items-center px-3 sm:px-5 py-3" 
       onLoad={() =>plotPinIconsDynamically()}
     >
-      {OverheadImage? 
-        <img src={OverheadImage} className="page-content landing-img" alt="Overhead Map" /> :
-        <div className={`page-content skeleton-pulse`} />
-      }
+      <LandingPageImage />
       <div className='h-[70vh] sm:h-[80vh] md:h-[85vh] w-full rounded-lg radial-container'>
         <div className="rotating bg-circularLight">
           <div className="radial-point"></div>

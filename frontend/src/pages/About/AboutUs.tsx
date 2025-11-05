@@ -1,3 +1,4 @@
+import AboutImgContainer from "./AboutImgContainer"
 import BannerSection from "../../components/ui/BannerSection"
 import agentImg from "../../assets/images/agent-1.png"
 import agentImg2 from "../../assets/images/agent-2.png"
@@ -24,9 +25,7 @@ function AboutUs() {
           </div>
 
           <div className="right w-full md:flex-[0.45]">
-            {agentImg? <img src={agentImg} alt="Agent on house tour" className="w-full h-auto rounded-lg"/> 
-              :
-              <div className="skeleton h-100 w-full"></div>}
+              <AboutImgContainer src={agentImg} alt="Agent on house tour" />
           </div>
         </section>
 
@@ -45,9 +44,7 @@ function AboutUs() {
           </div>
 
           <div className="right w-full md:flex-[0.45]">
-            {agentImg? <img src={agentImg2} alt="Agent greeting client" className="w-full h-auto rounded-lg"/>
-              : <div className="skeleton h-90 w-full"></div>
-            }
+            <AboutImgContainer src={agentImg2} alt="Agent greeting client" />
           </div>
         </section>
       </main>
