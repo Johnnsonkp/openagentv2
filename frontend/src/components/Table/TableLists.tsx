@@ -60,11 +60,11 @@ function TableList() {
       </dialog>
   )
 
-  {loading && contacts.length === 0 && <DefaultTable />}
+  {loading && contacts?.length === 0 && <DefaultTable />}
 
   return (
     <>
-    <h2>Contacts ({contacts && contacts.length})</h2>
+    <h2>Contacts ({contacts && contacts?.length})</h2>
 
     <DeleteConfirmationModal />
     
@@ -83,7 +83,7 @@ function TableList() {
           </tr>
         </thead>
         <tbody>
-          {!loading && contacts.length > 0 && contacts.map((contact: Contact, index: number) => (
+          {!loading && contacts?.length > 0 && contacts?.map((contact: Contact, index: number) => (
             <>
             <tr key={index}>
               <th>
