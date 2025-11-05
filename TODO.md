@@ -69,6 +69,8 @@
 - [ ] Document local/deployment steps
 - [x] Deploy client to railway app
 - [x] Deploy server to railway app
+- [x] Remove "/api" proxy block from nginx.conf file
+- [x] Edit api.ts making baseURL flexible for local and production env
 
 ### 8. Documentation & Submission
 - [ ] Update README with full tech stack and setup instructions
