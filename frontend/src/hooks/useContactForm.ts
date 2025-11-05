@@ -2,6 +2,7 @@ import type { ApiError, ContactCreateResponse, ContactFormData } from '../types/
 import { ValidationError, validateContactForm } from '../utils/validation';
 
 import { apiClient } from '../lib/api';
+import { useContactStore } from '../store/contactStore';
 import { useFormStore } from '../store/formStore';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -23,6 +24,7 @@ export const useContactForm = (): UseContactFormReturn => {
   const formStore = useFormStore();  
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const { refreshContacts } = useContactStore();
 
   const handleChange = (field: keyof ContactFormData, value: string) => {
     formStore.setField(field, value);    
@@ -82,6 +84,8 @@ export const useContactForm = (): UseContactFormReturn => {
 
       if (response.data.success) {
         formStore.setSuccess(true);
+        refreshContacts(response.data.data);
+        console.log('Response Data:', response.data);
         navigate('/thank-you', { 
           state: { 
             contactName: `${formData.firstName} ${formData.lastName}`,

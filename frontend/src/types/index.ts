@@ -32,6 +32,7 @@ export interface ContactStore {
   loading: boolean
   error: string | null
 
+  refreshContacts: (contact: Contact) => Promise<void>
   fetchContacts: () => Promise<void>
   addContact: (contact: Omit<Contact, 'id' | 'verified'>) => Promise<void>
   markVerified: (id: number) => Promise<void>
