@@ -68,13 +68,14 @@ function ContactList() {
     }
   };
 
-  {loading == false && (!contacts || contacts.length === 0) && <DefaultTable />}
+  
 
   return (
     <div>
     <h2>Contacts ({contacts && contacts?.length})</h2>
 
     {/* Delete Confirmation Modal */}
+    {loading == false && (!contacts || contacts.length === 0) && <DefaultTable />}
     {toggleModal && (
       <div
         id="deleteConfirmationModal"
@@ -237,7 +238,7 @@ function ContactList() {
         </thead>
         <tbody 
           className={`${loading===true ? 'opacity-0 translate-y-3 pointer-events-none' : 'transition-opacity duration-500 opacity-100 translate-y-0'}`}>
-          {loading === false && contacts?.length > 0 ? contacts?.map((contact: Contact, index: number) => (
+          {loading === false && contacts?.length > 0 && contacts?.map((contact: Contact, index: number) => (
             <tr key={contact.id}>
               <th>
                 <label>
@@ -300,8 +301,10 @@ function ContactList() {
                 </button>
               </td>
             </tr>
-          )) : <ListLoadingSkeleton loading={loading} />
+          )) 
         }
+        {loading === true && <ListLoadingSkeleton />}
+
         </tbody>
         <tfoot className="bg-gray-300 w-full">
           <tr>
