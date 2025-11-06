@@ -2,9 +2,10 @@ import { useEffect, useState } from "react"
 
 import {Contact} from "../../types/contactTypes"
 import DefaultTable from "./defaultTable";
+import ListLoadingSkeleton from "./ListLoadingSkeleton";
 import { useContactStore } from "../../store/contactStore"
 
-function TableList() {
+function ContactList() {
   const { contacts, loading, fetchContacts, markVerified, deleteContact, updateContact } = useContactStore();
   const [toggleModal, setToggleModal] = useState(false);
   const [toggleEditModal, setToggleEditModal] = useState(false);
@@ -67,7 +68,7 @@ function TableList() {
     }
   };
 
-  {loading && contacts?.length === 0 && <DefaultTable />}
+  {loading == false && (!contacts || contacts.length === 0) && <DefaultTable />}
 
   return (
     <div>
@@ -234,14 +235,15 @@ function TableList() {
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
-          {!loading && contacts?.length > 0 && contacts?.map((contact: Contact, index: number) => (
+        <tbody 
+          className={`${loading===true ? 'opacity-0 translate-y-3 pointer-events-none' : 'transition-opacity duration-500 opacity-100 translate-y-0'}`}>
+          {loading === false && contacts?.length > 0 ? contacts?.map((contact: Contact, index: number) => (
             <tr key={contact.id}>
               <th>
                 <label>
-                  <input 
-                    type="checkbox" 
-                    className="checkbox" 
+                  <input
+                    type="checkbox"
+                    className="checkbox"
                     checked={contact.verified}
                     disabled={contact.verified}
                     onChange={() => markVerified(contact.id)}
@@ -258,12 +260,14 @@ function TableList() {
                   </div>
                   <div className="w-fit">
                     <div className="font-bold mb-1">{contact.firstName} {contact.lastName}</div>
-                    {contact.verified?
+                    {contact.verified ? (
                       <div className="badge badge-success font-bold rounded-full gap-1">
                         <svg className="size-[1em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="currentColor" strokeLinejoin="miter" strokeLinecap="butt"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeLinecap="square" strokeMiterlimit="10" strokeWidth="2"></circle><polyline points="7 13 10 16 17 8" fill="none" stroke="currentColor" strokeLinecap="square" strokeMiterlimit="10" strokeWidth="2"></polyline></g></svg>
                         Verified
-                      </div> : 
-                      <div className="opacity-60 badge badge-outline badge-ghost rounded-full">Unverified</div>}
+                      </div>
+                    ) : (
+                      <div className="opacity-60 badge badge-outline badge-ghost rounded-full">Unverified</div>
+                    )}
                   </div>
                 </div>
               </td>
@@ -271,33 +275,33 @@ function TableList() {
               <td>{contact.email}</td>
               <td>{contact.phone}</td>
               <th className="w-52">
-                <textarea 
+                <textarea
                   value={contact.additionalInfo}
                   className="textarea bg-transparent w-52"
                   readOnly
-                >
-                </textarea>
+                />
               </th>
               <td className="flex-col gap-2 justify-between items-center text-sm text-gray-500">
                 <button
-                    onClick={() => handleEditClick(contact)}
-                    className="flex my-1 items-center gap-1 border border-gray-300 rounded-md px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:border-blue-500 transition-colors cursor-pointer"
-                  >
-                    <EditIcon />
-                    Edit
-                  </button>
-                  {/* <span className="text-gray-300">|</span> */}
-                  <button 
-                    onClick={()=> {
-                      setSelectedContact({ firstName: contact?.firstName, lastName: contact?.lastName, id: contact?.id });
-                      setToggleModal(true)
-                    }}
-                    className="my-1 border border-gray-300 rounded-md px-2 py-1 text-sm text-red-600 hover:text-red-800 transition-colors cursor-pointer">
-                    Delete
-                  </button>
+                  onClick={() => handleEditClick(contact)}
+                  className="flex my-1 items-center gap-1 border border-gray-300 rounded-md px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:border-blue-500 transition-colors cursor-pointer"
+                >
+                  <EditIcon />
+                  Edit
+                </button>
+                <button
+                  onClick={() => {
+                    setSelectedContact({ firstName: contact?.firstName, lastName: contact?.lastName, id: contact?.id });
+                    setToggleModal(true);
+                  }}
+                  className="my-1 border border-gray-300 rounded-md px-2 py-1 text-sm text-red-600 hover:text-red-800 transition-colors cursor-pointer"
+                >
+                  Delete
+                </button>
               </td>
-              </tr>
-          ))}
+            </tr>
+          )) : <ListLoadingSkeleton loading={loading} />
+        }
         </tbody>
         <tfoot className="bg-gray-300 w-full">
           <tr>
@@ -317,4 +321,4 @@ function TableList() {
   )
 }
 
-export default TableList
+export default ContactList;

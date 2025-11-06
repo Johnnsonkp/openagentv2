@@ -11,6 +11,9 @@ export default function ContactUsForm() {
     handleSubmit,
   } = useContactForm();
 
+
+  console.log("errsors:", errors);
+
   return (
     <div className="" id="contact">
 
@@ -120,6 +123,8 @@ export default function ContactUsForm() {
             >
               {isSubmitting ? 'Sending...' : 'Send Message'}
             </button>
+
+            {errors.message && (<p className="text-red-500 text-sm mt-1">{errors.message}</p>)}
 
             <p className="text-sm text-gray-500 mt-2">
               By sending a message you agree to the Terms and Condition and Privacy Policy

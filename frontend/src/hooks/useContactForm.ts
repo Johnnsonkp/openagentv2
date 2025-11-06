@@ -96,6 +96,7 @@ export const useContactForm = (): UseContactFormReturn => {
           resetForm();
         }, 1000);
       } else {
+        console.log("response data:", response.data);
         setSubmitError(response.data.message || 'Failed to submit form');
       }
     } catch (error) {
